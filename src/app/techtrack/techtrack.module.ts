@@ -10,12 +10,13 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     HomeComponent,
     TeachersListComponent,
-    SubjectsListComponent
+    SubjectsListComponent,
+    
   ],
   imports: [
     CommonModule,
     TechTrackRoutingModule,
-    MatButtonModule
+    MatButtonModule,
   ]
 })
 export class TechtrackModule { }
