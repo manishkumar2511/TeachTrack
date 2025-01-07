@@ -40,3 +40,18 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+/.vs/slnx.sqlite
+/.vs/TeachTrack/config/applicationhost.config
+/.vs/TeachTrack/FileContentIndex/ef82103b-5fe1-45a7-938f-d13e201f8eb5.vsidx
+/.vs/TeachTrack/v17/.wsuo
+/.vs/TeachTrack/v17/DocumentLayout.backup.json
+/.vs/TeachTrack/v17/DocumentLayout.json
+/.vs/TeachTrack/FileContentIndex/f24f8a7b-1f17-4490-8568-a539b6968e7d.vsidx
+/.vs/slnx.sqlite-journal
+/.vs/TeachTrack/FileContentIndex/6fe6ae9a-7a18-4242-b3be-dd73a8e63361.vsidx
+/.vs/TeachTrack/FileContentIndex/0b71560c-74d0-437b-89a5-da8d014687a6.vsidx
+/.vs/TeachTrack/FileContentIndex/944588a6-c267-4a96-95ef-a283ee8753fc.vsidx
+/.vs/TeachTrack/FileContentIndex/c11413b3-1c85-405d-8659-aa75dcce3335.vsidx
+/.vs/TeachTrack/FileContentIndex/0bd2f45a-923c-4158-a217-2eeefc25386d.vsidx
+/.gitignore
+/.gitignore
