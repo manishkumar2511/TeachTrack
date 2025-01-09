@@ -2,26 +2,62 @@
 
 <mat-dialog-content>
   <form [formGroup]="studentForm">
+    <!-- ID (hidden field) -->
+    <mat-form-field appearance="fill" *ngIf="isEditMode">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" readonly />
+    </mat-form-field>
+
+    <!-- Name -->
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" />
+      <mat-error *ngIf="studentForm.controls['name'].invalid && studentForm.controls['name'].touched">
+        Name is required
+      </mat-error>
     </mat-form-field>
 
+    <!-- Roll Number -->
     <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" />
+      <mat-label>Roll Number</mat-label>
+      <input matInput formControlName="rollNumber" />
+      <mat-error *ngIf="studentForm.controls['rollNumber'].invalid && studentForm.controls['rollNumber'].touched">
+        Roll Number is required
+      </mat-error>
     </mat-form-field>
 
+    <!-- Age -->
     <mat-form-field appearance="fill">
       <mat-label>Age</mat-label>
       <input matInput type="number" formControlName="age" />
+      <mat-error *ngIf="studentForm.controls['age'].invalid && studentForm.controls['age'].touched">
+        <span *ngIf="studentForm.controls['age'].hasError('required')">Age is required</span>
+        <span *ngIf="studentForm.controls['age'].hasError('min')">Minimum age should be 5</span>
+        <span *ngIf="studentForm.controls['age'].hasError('max')">Maximum age should be 100</span>
+      </mat-error>
     </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="studentForm.controls['email'].invalid && studentForm.controls['email'].touched">
+        <span *ngIf="studentForm.controls['email'].hasError('required')">Email is required</span>
+        <span *ngIf="studentForm.controls['email'].hasError('email')">Enter a valid email</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Image Upload -->
+    <div>
+      <label for="imageUpload">Upload Image</label>
+      <input type="file" id="imageUpload" (change)="onFileSelected($event)" accept="image/*" />
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="closeDialog()">Cancel</button>
+      <button mat-button color="primary" (click)="saveStudent()" [disabled]="!studentForm.valid">
+        {{ isEditMode ? 'Update' : 'Save' }}
+      </button>
+    </mat-dialog-actions>
   </form>
 </mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button (click)="closeDialog()">Cancel</button>
-  <button mat-button color="primary" (click)="saveStudent()" [disabled]="!studentForm.valid">
-    {{ isEditMode ? 'Update' : 'Save' }}
-  </button>
-</mat-dialog-actions>

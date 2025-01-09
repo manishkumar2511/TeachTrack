@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StudentService } from './services/student.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     StudentFormComponent,
     
   ],
+  providers: [StudentService],
   imports: [
     CommonModule,
     TechTrackRoutingModule,
@@ -33,7 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+
 
   ]
 })
