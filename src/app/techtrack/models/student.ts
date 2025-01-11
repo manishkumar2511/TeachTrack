@@ -1,9 +1,11 @@
 export interface Student {
-  id?: number;
+  studentId?: number;
   name: string;
   age: number;
   rollNumber: string;
   email: string;
-  studentClass: string;  
-  studentImage: File;
+  class: string;
+  contact: number;
+  gender: string;
+  image: string | File;
 }

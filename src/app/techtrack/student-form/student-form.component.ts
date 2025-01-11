@@ -29,18 +29,19 @@ export class StudentFormComponent implements OnInit {
 
   private initializeForm(): void {
     this.studentForm = this.fb.group({
-      id: [this.data?.id],
+      studentId: [this.data?.studentId],
       name: [this.data?.name || '', [Validators.required, Validators.minLength(3)]],
-      age: [this.data?.age || '', [Validators.required, Validators.min(5), Validators.max(100)]],
       rollNumber: [this.data?.rollNumber || '', [Validators.required, Validators.pattern('^[0-9]{4,10}$')]],
+      age: [this.data?.age || '', [Validators.required, Validators.min(5), Validators.max(100)]],
+      class: [this.data?.class || '', [Validators.required]],
+      gender: [this.data?.gender || '', [Validators.required]],
       email: [this.data?.email || '', [Validators.required, Validators.email]],
-      studentImage: [null, Validators.required],
+      contact: [this.data?.contact || '', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      studentImage: [null]
     });
 
-    this.isEditMode = !!this.data?.id;
+    this.isEditMode = !!this.data?.studentId;
   }
-
-
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -52,12 +53,11 @@ export class StudentFormComponent implements OnInit {
   }
 
   saveStudent(): void {
-    debugger;
     if (this.studentForm.valid) {
       const studentData: Student = this.studentForm.value;
 
       if (this.isEditMode) {
-        this.studentService.getStudentById(this.data.id!).subscribe(() => {
+        this.studentService.updateStudent(studentData).subscribe(() => {
           this.dialogRef.close(true);
         });
       } else {

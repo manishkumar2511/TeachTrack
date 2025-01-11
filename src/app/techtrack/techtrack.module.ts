@@ -14,6 +14,10 @@ import { MatInputModule } from '@angular/material/input';
 import { StudentFormComponent } from './student-form/student-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentService } from './services/student.service';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +40,9 @@ import { StudentService } from './services/student.service';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatRadioModule,
+    MatPaginatorModule,
+    MatTooltipModule
 
 
   ]

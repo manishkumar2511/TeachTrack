@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Student } from '../models/student';
 
 @Injectable({
@@ -9,14 +9,26 @@ import { Student } from '../models/student';
 export class StudentService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl = 'https://your-api-url.com/api';
+  private apiUrl = '';
 
-  getStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>(this.apiUrl);
+  //getStudents(): Observable<Student[]> {
+  //  return this.http.get<Student[]>(this.apiUrl);
+  //}
+  getStudentsByName(searchStudentName?: string): Observable<Student[]> {
+    debugger;
+    let params = new HttpParams();
+    if (searchStudentName) {
+      params = params.set('searchStudentName', searchStudentName);
+    }
+    return this.http.get<Student[]>(`${this.apiUrl}/students`, { params });
   }
 
-  getStudentById(id: number): Observable<Student> {
-    return this.http.get<Student>(`${this.apiUrl}/students/${id}`);
+  getStudents(): Observable<Student[]> {
+    return of(this.getMockStudents()); 
+  }
+
+  getStudentById(studentId: number): Observable<Student> {
+    return this.http.get<Student>(`${this.apiUrl}/students/${studentId}`);
   }
 
   addStudent(student: Student): Observable<Student> {
@@ -25,6 +37,34 @@ export class StudentService {
   }
 
   updateStudent(student: Student): Observable<Student> {
-    return this.http.put<Student>(`${this.apiUrl}/students/${student.id}`, student);
+    return this.http.put<Student>(`${this.apiUrl}/students/${student.studentId}`, student);
   }
+
+
+
+  private getMockStudents(): any[] {
+    return [
+      {
+        studentId: 1, image: 'https://via.placeholder.com/50', name: 'John Doe',
+        class: '10th Grade', rollNumber: '12345', age: 16, email: 'john.doe@example.com',
+        contact: 9876543210, gender: 'Male'
+      },
+      {
+        studentId: 2, image: 'https://via.placeholder.com/50', name: 'Jane Smith',
+        class: '9th Grade', rollNumber: '67890', age: 15, email: 'jane.smith@example.com',
+        contact: 9876543211, gender: 'Female'
+      },
+      {
+        studentId: 3, image: 'https://via.placeholder.com/50', name: 'Alice Johnson',
+        class: '8th Grade', rollNumber: '54321', age: 14, email: 'alice.johnson@example.com',
+        contact: 9876543212, gender: 'Female'
+      },
+      {
+        studentId: 4, image: 'https://via.placeholder.com/50', name: 'Bob Brown',
+        class: '12th Grade', rollNumber: '98765', age: 17, email: 'bob.brown@example.com',
+        contact: 9876543213, gender: 'Male'
+      }
+    ];
+  }
+
 }
