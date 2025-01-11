@@ -27,8 +27,12 @@ export class StudentService {
     return of(this.getMockStudents()); 
   }
 
-  getStudentById(studentId: number): Observable<Student> {
-    return this.http.get<Student>(`${this.apiUrl}/students/${studentId}`);
+  //getStudentById(studentId: string): Observable<Student> {
+  //  return this.http.get<Student>(`${this.apiUrl}/students/${studentId}`);
+  //}
+  getStudentById(studentId: string): Observable<Student> {
+    const student = this.getMockStudents().find(s => s.studentId == studentId);
+    return of(student); 
   }
 
   addStudent(student: Student): Observable<Student> {
@@ -37,7 +41,12 @@ export class StudentService {
   }
 
   updateStudent(student: Student): Observable<Student> {
+    debugger;
     return this.http.put<Student>(`${this.apiUrl}/students/${student.studentId}`, student);
+  }
+  deleteStudent(studentId: string) {
+    debugger;
+    return this.http.delete(`/api/students/${studentId}`);
   }
 
 
@@ -45,26 +54,27 @@ export class StudentService {
   private getMockStudents(): any[] {
     return [
       {
-        studentId: 1, image: 'https://via.placeholder.com/50', name: 'John Doe',
+        studentId: '1', image: 'https://via.placeholder.com/50', name: 'John Doe',
         class: '10th Grade', rollNumber: '12345', age: 16, email: 'john.doe@example.com',
-        contact: 9876543210, gender: 'Male'
+        contact: 9876543210, gender: 'Male', status: 'completed' 
       },
       {
-        studentId: 2, image: 'https://via.placeholder.com/50', name: 'Jane Smith',
+        studentId: '2', image: 'https://via.placeholder.com/50', name: 'Jane Smith',
         class: '9th Grade', rollNumber: '67890', age: 15, email: 'jane.smith@example.com',
-        contact: 9876543211, gender: 'Female'
+        contact: 9876543211, gender: 'Female', status: 'ongoing' 
       },
       {
-        studentId: 3, image: 'https://via.placeholder.com/50', name: 'Alice Johnson',
+        studentId: '3', image: 'https://via.placeholder.com/50', name: 'Alice Johnson',
         class: '8th Grade', rollNumber: '54321', age: 14, email: 'alice.johnson@example.com',
-        contact: 9876543212, gender: 'Female'
+        contact: 9876543212, gender: 'Female', status: 'suspended' 
       },
       {
-        studentId: 4, image: 'https://via.placeholder.com/50', name: 'Bob Brown',
+        studentId: '4', image: 'https://via.placeholder.com/50', name: 'Bob Brown',
         class: '12th Grade', rollNumber: '98765', age: 17, email: 'bob.brown@example.com',
-        contact: 9876543213, gender: 'Male'
+        contact: 9876543213, gender: 'Male', status: 'ongoing' 
       }
     ];
   }
+
 
 }

@@ -1,1 +1,133 @@
-<p>teachers-list works!</p>
+<div class="container mt-4">
+  <div class="row mt-3">
+    <div class="col-md-5 welcome-message">
+      <h3>Welcome to <span class="highlight">TeachTrack</span></h3>
+    </div>
+    <div class="col-md-7 welcome-message">
+      <h3 class="highlight-list-dashboard">Teachers List Dashboard</h3>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <mat-card appearance="outlined" style="border-radius: 15px; background-color: #e3f2fd; color: #34495e;">
+        <mat-card-content>
+          <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <mat-icon style="margin-right: 8px;">group</mat-icon>
+              <span><strong>Total Teachers:</strong> 20</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <mat-icon style="margin-right: 8px; color: #28a745;">check_circle</mat-icon>
+              <span class="text-success"><strong>Active:</strong> 18</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-6 d-flex justify-content-end align-items-center">
+      <div class="mr-3">
+        <mat-form-field>
+          <mat-label>Search by Teacher Name</mat-label>
+          <input matInput type="search" [(ngModel)]="searchTerm" (keyup)="onKeyUp()">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" style="border-radius: 20px;" (click)="openTeacherFormDialog()">
+          Add New
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
+
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+          <td mat-cell *matCellDef="let element">
+            <img [src]="element.image" alt="Image" style="width: 50px; height: 50px; border-radius: 50%;">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Age </th>
+          <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Subject </th>
+          <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="experience">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Experience (Years) </th>
+          <td mat-cell *matCellDef="let element"> {{element.experience}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="qualification">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Qualification </th>
+          <td mat-cell *matCellDef="let element"> {{element.qualification}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+          <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contact">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
+          <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-card class="status-card" [ngClass]="{
+             'status-ongoing': element.status === 'active',
+             'status-suspended': element.status === 'inActive',
+           }">
+              <mat-card-content>
+                <span>{{ element.status }}</span>
+              </mat-card-content>
+            </mat-card>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon color="primary"
+                      style="cursor: pointer;"
+                      fontIcon="edit"
+                      matTooltip="Edit"
+                      (click)="editTeacherRecord(element.teacherId)">
+            </mat-icon>
+            <mat-icon color="warn"
+                      style="cursor: pointer;"
+                      fontIcon="delete"
+                      matTooltip="Delete"
+                      (click)="deleteTeacherRecord(element.teacherId)">
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of teachers"></mat-paginator>
+    </div>
+  </div>
+</div>

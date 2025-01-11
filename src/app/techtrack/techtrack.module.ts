@@ -17,6 +17,7 @@ import { StudentService } from './services/student.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AlertDialogBoxComponent } from './helper/alert-dialog-box/alert-dialog-box.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     TeachersListComponent,
     SubjectsListComponent,
     StudentFormComponent,
+    AlertDialogBoxComponent,
     
   ],
   providers: [StudentService],

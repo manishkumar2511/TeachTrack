@@ -2,3 +2,41 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.welcome-message {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  padding-left: 10px;
+}
+
+.highlight {
+  color: #007bff;
+}
+.highlight-list-dashboard{
+    color:brown
+}
+
+.content {
+  text-align: left;
+  margin-left: auto;
+}
+
+mat-card {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+  mat-card:hover {
+    transform: scale(1.05);
+  }
+
+mat-form-field {
+  width: 250px;
+}
+
+.mat-elevation-z8 {
+  border-radius: 8px;
+  overflow: hidden;
+}
+

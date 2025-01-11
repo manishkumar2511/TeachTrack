@@ -6,6 +6,9 @@ import { Subject} from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { subscribe } from 'diagnostics_channel';
+import { AlertDialogBoxComponent } from '../helper/alert-dialog-box/alert-dialog-box.component';
+import { AlertMessage } from '../helper/alertMessage';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +26,7 @@ export class HomeComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
 
   displayedColumns: string[] = [
-    'image', 'name', 'rollNumber', 'class', 'age', 'gender', 'email', 'contact', 'actions'
+    'image', 'name', 'rollNumber', 'class', 'age', 'gender', 'email', 'contact','status', 'actions'
   ];
 
   constructor(
@@ -69,22 +72,44 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openDialog(student?: any): void {
+  openStudentFormDialog(student?: any): void {
     const dialogRef = this.dialog.open(StudentFormComponent, {
       width: '600px',
       height: '500px',
-      data: student || null
+    });
+  }
+
+  editStudentRecord(studentId: string) {
+    this.studentService.getStudentById(studentId).subscribe(student => {
+      const dialogRef = this.dialog.open(StudentFormComponent, {
+        width: '600px',
+        height: '500px',
+        data: student 
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.getStudents(); 
+        }
+      });
+    });
+  }
+
+  deleteStudentRecord(studentId: string) {
+    const dialogRef = this.dialog.open(AlertDialogBoxComponent, {
+      data: {
+        studentId: studentId, 
+        message: AlertMessage.DELETE_STUDENT, 
+        actionTitle: 'Delete' 
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        if (student) {
-          const index = this.dataSource.data.findIndex(s => s.rollNumber === student.rollNumber);
-          if (index !== -1) this.dataSource.data[index] = result;
-        } else {
-          this.dataSource.data.push(result);
-        }
+        this.getStudents();
       }
     });
   }
+
+
 }

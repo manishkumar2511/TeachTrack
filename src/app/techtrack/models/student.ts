@@ -1,5 +1,5 @@
 export interface Student {
-  studentId?: number;
+  studentId?: number | string;
   name: string;
   age: number;
   rollNumber: string;
@@ -8,4 +8,5 @@ export interface Student {
   contact: number;
   gender: string;
   image: string | File;
+  status: string;
 }
