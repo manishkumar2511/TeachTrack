@@ -1,9 +1,21 @@
-.mat-toolbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
+.nav-link {
+  margin-right: 20px; 
+  text-decoration: none;
+  color: white;
 }
 
-.spacer {
-  flex: 1;
+.nav-link:last-child {
+  margin-right: 0;
+}
+
+nav {
+  display: flex;
+  gap: 20px; 
+}
+
+.active {
+  border-bottom: 2px solid #eab308;
+  transform: scale(1.1);
+  transition: border-bottom 0.3s ease, transform 0.3s ease;
+  display: inline-block;
 }

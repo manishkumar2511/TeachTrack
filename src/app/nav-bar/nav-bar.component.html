@@ -1,16 +1,7 @@
-<!--<mat-toolbar color="primary">
-  <span>TeachTrack</span>
-  <span class="spacer"></span>
-  <button mat-button routerLink="/home">Home</button>
-  <button mat-button routerLink="/techtrack/subjects">Subjects</button>
-  <button mat-button routerLink="/techtrack/teachers">Teachers</button>
-</mat-toolbar>-->
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="padding-left:10px">
-  <a class="navbar-brand" routerLink="/home">TeachTrack</a>
-  <!--<img src="../../assets/images/techTracklogo.jpeg" alt="TeachTrack Logo" height="40">-->
-
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="padding-left:10px">
+  <a class="navbar-brand" routerLink="/home">TeachTrack</a>-->
+<!--<img src="../../assets/images/techTracklogo.jpeg" alt="TeachTrack Logo" height="40">-->
+<!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
@@ -26,6 +17,39 @@
       </li>
     </ul>
   </div>
-</nav>
+</nav>-->
+
+<header class="text-gray-400 bg-gray-900 body-font">
+  <div class="container mx-auto flex flex-wrap mt-2 p-2 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-white mt-1 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+      <span class="ml-3 text-xl">TeachTrack</span>
+    </a>
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center gap-6">
+      <a class="nav-link" routerLink="/students" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Students</a>
+      <a class="nav-link" routerLink="/techtrack/subjects" routerLinkActive="active">Subjects</a>
+      <a class="nav-link" routerLink="/techtrack/teachers" routerLinkActive="active">Teachers</a>
+    </nav>
+  </div>
+</header>
 
 
+
+
+
+<!--<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+  <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-purple-500 rounded-full" viewBox="0 0 24 24">
+      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+    </svg>
+    <span class="ml-3 text-xl">Tailblocks</span>
+  </a>
+  <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Students</a>
+    <a routerLink="/techtrack/subjects" routerLinkActive="active" hover:text-white>Subjects</a>
+    <a routerLink="/techtrack/teachers" routerLinkActive="active">Teachers</a>
+  </nav>
+
+</div>-->
