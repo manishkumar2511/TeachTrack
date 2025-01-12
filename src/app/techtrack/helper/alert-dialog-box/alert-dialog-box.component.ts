@@ -28,40 +28,44 @@ export class AlertDialogBoxComponent {
   ) {
     this.message = data.message 
     this.actionTitle = data.actionTitle 
-    this.studentId = data.studentId; 
+    this.studentId = data.studentId;
+    this.subjectId = data.subjectId; 
+
+    this.teacherId = data.teacherId; 
+
   }
 
   confirmAction(): void {
-    debugger;
     if (this.actionTitle?.toLowerCase() === 'delete') {
-      const deleteObservable = this.studentId
-        ? this.studentService.deleteStudent(this.studentId)
-        : this.subjectId
-          ? this.subjectService.deleteSubject(this.subjectId)
-          : this.teacherId
-            ? this.teacherService.deleteTeacher(this.teacherId)
-            : null;
+      const deleteServicesMap = {
+        student: this.studentId ? this.studentService.deleteStudent(this.studentId): null,
+        subject: this.subjectId ? this.subjectService.deleteSubject(this.subjectId) : null,
+        teacher: this.teacherId ? this.teacherService.deleteTeacher(this.teacherId) : null,
+      };
+
+      const deleteObservable = this.studentId ? deleteServicesMap.student :
+        this.subjectId ? deleteServicesMap.subject :
+          this.teacherId ? deleteServicesMap.teacher : null;
 
       if (deleteObservable) {
         deleteObservable.subscribe(() => {
           this.dialogRef.close(true);
-          this.refreshTableData(); 
+          this.refreshTableData();
         }, () => {
           this.dialogRef.close(false);
         });
       } else {
-        this.dialogRef.close(true); 
+        this.dialogRef.close(true);
       }
     } else {
-      this.dialogRef.close(true); 
+      this.dialogRef.close(true);
     }
   }
 
   cancelAction(): void {
-    this.dialogRef.close(true); 
+    this.dialogRef.close(false);
   }
 
-  // helper mwethod
   refreshTableData(): void {
     const dataObservable = this.studentId
       ? this.studentService.getStudents()
@@ -71,4 +75,6 @@ export class AlertDialogBoxComponent {
           ? this.teacherService.getTeachers()
           : null;
   }
+
+
 }

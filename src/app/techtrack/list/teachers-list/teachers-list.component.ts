@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TeacherService } from '../../services/teacher.service';
 import { AlertDialogBoxComponent } from '../../helper/alert-dialog-box/alert-dialog-box.component';
 import { AlertMessage } from '../../helper/alertMessage';
-import { StudentFormComponent } from '../../student-form/student-form.component';
+import { TeacherFormComponent } from '../../teacher-form/teacher-form.component';
 
 @Component({
   selector: 'app-teachers-list',
@@ -68,7 +68,7 @@ export class TeachersListComponent implements OnInit {
   }
 
   openTeacherFormDialog(): void {
-    const dialogRef = this.dialog.open(StudentFormComponent, {
+    const dialogRef = this.dialog.open(TeacherFormComponent, {
       width: '600px',
       height: '500px',
     });
@@ -76,7 +76,7 @@ export class TeachersListComponent implements OnInit {
 
   editTeacherRecord(teacherId: string) {
     this.teacherService.getTeacherById(teacherId).subscribe(teacher => {
-      const dialogRef = this.dialog.open(StudentFormComponent, {
+      const dialogRef = this.dialog.open(TeacherFormComponent, {
         width: '600px',
         height: '500px',
         data: teacher
@@ -93,7 +93,7 @@ export class TeachersListComponent implements OnInit {
   deleteTeacherRecord(teacherId: string) {
     const dialogRef = this.dialog.open(AlertDialogBoxComponent, {
       data: {
-        studentId: teacherId,
+        teacherId: teacherId,
         message: AlertMessage.DELETE_TEACHER,
         actionTitle: 'Delete'
       }

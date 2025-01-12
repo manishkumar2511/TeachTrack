@@ -1,0 +1,115 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Teacher' : 'Add New Teacher' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="teacherForm" class="teacher-form">
+    <div class="form-container">
+      <div class="form-left">
+        <!-- Teacher ID (Hidden Field) -->
+        <mat-form-field appearance="fill" *ngIf="isEditMode">
+          <mat-label>Teacher ID</mat-label>
+          <input matInput formControlName="teacherId" readonly />
+        </mat-form-field>
+
+        <!-- Name -->
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" />
+          <mat-error *ngIf="teacherForm.controls['name'].invalid && teacherForm.controls['name'].touched">
+            <span *ngIf="teacherForm.controls['name'].hasError('required')">Name is required</span>
+            <span *ngIf="teacherForm.controls['name'].hasError('minlength')">Minimum 3 characters required</span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Age -->
+        <mat-form-field appearance="fill">
+          <mat-label>Age</mat-label>
+          <input matInput type="number" formControlName="age" />
+          <mat-error *ngIf="teacherForm.controls['age'].invalid && teacherForm.controls['age'].touched">
+            <span *ngIf="teacherForm.controls['age'].hasError('required')">Age is required</span>
+            <span *ngIf="teacherForm.controls['age'].hasError('min')">Age must be a valid number</span>
+            <span *ngIf="teacherForm.controls['age'].hasError('max')">Age is too high</span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Email -->
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error *ngIf="teacherForm.controls['email'].invalid && teacherForm.controls['email'].touched">
+            <span *ngIf="teacherForm.controls['email'].hasError('required')">Email is required</span>
+            <span *ngIf="teacherForm.controls['email'].hasError('email')">Enter a valid email</span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Contact Number -->
+        <mat-form-field appearance="fill">
+          <mat-label>Contact Number</mat-label>
+          <input matInput type="tel" formControlName="contact" />
+          <mat-error *ngIf="teacherForm.controls['contact'].invalid && teacherForm.controls['contact'].touched">
+            <span *ngIf="teacherForm.controls['contact'].hasError('required')">Contact number is required</span>
+            <span *ngIf="teacherForm.controls['contact'].hasError('pattern')">Enter a valid 10-digit contact number</span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Gender -->
+        <mat-form-field appearance="fill">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
+            <mat-option value="Other">Other</mat-option>
+          </mat-select>
+          <mat-error *ngIf="teacherForm.controls['gender'].invalid && teacherForm.controls['gender'].touched">
+            Gender is required
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Qualification -->
+        <mat-form-field appearance="fill">
+          <mat-label>Qualification</mat-label>
+          <input matInput formControlName="qualification" />
+          <mat-error *ngIf="teacherForm.controls['qualification'].invalid && teacherForm.controls['qualification'].touched">
+            <span *ngIf="teacherForm.controls['qualification'].hasError('required')">Qualification is required</span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Experience -->
+        <mat-form-field appearance="fill">
+          <mat-label>Experience</mat-label>
+          <input matInput type="number" formControlName="experience" />
+          <mat-error *ngIf="teacherForm.controls['experience'].invalid && teacherForm.controls['experience'].touched">
+            <span *ngIf="teacherForm.controls['experience'].hasError('required')">Experience is required</span>
+            <span *ngIf="teacherForm.controls['experience'].hasError('min')">Experience should be at least 1 year</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-right">
+        <mat-form-field appearance="fill" *ngIf="isEditMode" class="status-field">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="active">Active</mat-option>
+            <mat-option value="inActive">Inactive</mat-option>
+            <mat-option value="suspended">Suspended</mat-option>
+          </mat-select>
+          <mat-error *ngIf="teacherForm.controls['status'].invalid && teacherForm.controls['status'].touched">
+            Status is required
+          </mat-error>
+        </mat-form-field>
+
+        <div class="image-upload">
+          <label for="imageUpload">Upload Image</label>
+          <input type="file" id="imageUpload" (change)="onFileSelected($event)" accept="image/*" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <mat-dialog-actions align="end">
+      <button mat-raised-button style="border-radius: 20px;" color="warn" (click)="closeDialog()">Cancel</button>
+      <button mat-raised-button style="border-radius: 20px;" color="primary" (click)="saveTeacher()" [disabled]="!teacherForm.valid">
+        {{ isEditMode ? 'Update' : 'Save' }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

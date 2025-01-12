@@ -20,7 +20,7 @@ export class StudentService {
     if (searchStudentName) {
       params = params.set('searchStudentName', searchStudentName);
     }
-    return this.http.get<Student[]>(`${this.apiUrl}/students`, { params });
+    return this.http.get<Student[]>(`${this.apiUrl}/student`, { params });
   }
 
   getStudents(): Observable<Student[]> {
@@ -28,7 +28,7 @@ export class StudentService {
   }
 
   //getStudentById(studentId: string): Observable<Student> {
-  //  return this.http.get<Student>(`${this.apiUrl}/students/${studentId}`);
+  //  return this.http.get<Student>(`${this.apiUrl}/student/${studentId}`);
   //}
   getStudentById(studentId: string): Observable<Student> {
     const student = this.getMockStudents().find(s => s.studentId == studentId);
@@ -37,16 +37,16 @@ export class StudentService {
 
   addStudent(student: Student): Observable<Student> {
     debugger;
-    return this.http.post<Student>(`${this.apiUrl}/students`, student);
+    return this.http.post<Student>(`${this.apiUrl}/student`, student);
   }
 
   updateStudent(student: Student): Observable<Student> {
     debugger;
-    return this.http.put<Student>(`${this.apiUrl}/students/${student.studentId}`, student);
+    return this.http.put<Student>(`${this.apiUrl}/student/${student.studentId}`, student);
   }
   deleteStudent(studentId: string) {
     debugger;
-    return this.http.delete(`/api/students/${studentId}`);
+    return this.http.delete(`/api/student/${studentId}`);
   }
 
 

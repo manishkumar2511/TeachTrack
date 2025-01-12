@@ -5,18 +5,18 @@
   color: white;
   font-weight: 300;
   min-width: 100px;
-  height:40px;
-  margin-top:40px;
+  height: 40px;
+  margin-top: 40px;
 }
 
 .status-ongoing {
-  background-color: #28a745; 
+  background-color: #28a745;
 }
 
 .status-suspended {
-  background-color: #dc3545; 
+  background-color: #dc3545;
 }
 
 .status-completed {
-  background-color: #17a2b8; 
+  background-color: #17a2b8;
 }

@@ -18,6 +18,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AlertDialogBoxComponent } from './helper/alert-dialog-box/alert-dialog-box.component';
+import { SubjectFormComponent } from './subject-form/subject-form.component';
+import { TeacherFormComponent } from './teacher-form/teacher-form.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -27,6 +30,8 @@ import { AlertDialogBoxComponent } from './helper/alert-dialog-box/alert-dialog-
     SubjectsListComponent,
     StudentFormComponent,
     AlertDialogBoxComponent,
+    SubjectFormComponent,
+    TeacherFormComponent,
     
   ],
   providers: [StudentService],
@@ -44,7 +49,8 @@ import { AlertDialogBoxComponent } from './helper/alert-dialog-box/alert-dialog-
     MatDialogModule,
     MatRadioModule,
     MatPaginatorModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
 
 
   ]

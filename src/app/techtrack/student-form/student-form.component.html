@@ -4,24 +4,20 @@
   <form [formGroup]="studentForm" class="student-form">
     <div class="form-container">
       <div class="form-left">
-        <!-- ID (Hidden Field) -->
         <mat-form-field appearance="fill" *ngIf="isEditMode">
           <mat-label>ID</mat-label>
           <input matInput formControlName="studentId" readonly />
         </mat-form-field>
 
-        <!-- Name -->
         <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
-          <input  matInput formControlName="name" />
+          <input matInput formControlName="name" />
           <mat-error *ngIf="studentForm.controls['name'].invalid && studentForm.controls['name'].touched">
             <span *ngIf="studentForm.controls['name'].hasError('required')">Name is required</span>
             <span *ngIf="studentForm.controls['name'].hasError('minlength')">Minimum 3 characters required</span>
           </mat-error>
         </mat-form-field>
 
-
-        <!-- Roll Number -->
         <mat-form-field appearance="fill">
           <mat-label>Roll Number</mat-label>
           <input matInput formControlName="rollNumber" />
@@ -31,7 +27,6 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- Age -->
         <mat-form-field appearance="fill">
           <mat-label>Age</mat-label>
           <input matInput type="number" formControlName="age" />
@@ -44,7 +39,6 @@
       </div>
 
       <div class="form-right">
-        <!-- Class -->
         <mat-form-field appearance="fill">
           <mat-label>Class</mat-label>
           <input matInput formControlName="class" />
@@ -53,15 +47,18 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- Gender -->
-        <mat-radio-group formControlName="gender">
-          <mat-radio-button value="male">Male</mat-radio-button>
-          <mat-radio-button value="female">Female</mat-radio-button>
-          <mat-radio-button value="other">Other</mat-radio-button>
-        </mat-radio-group>
+        <mat-form-field appearance="fill">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
+            <mat-option value="Other">Other</mat-option>
+          </mat-select>
+          <mat-error *ngIf="studentForm.controls['gender'].invalid && studentForm.controls['gender'].touched">
+            Gender is required
+          </mat-error>
+        </mat-form-field>
 
-
-        <!-- Email -->
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" />
@@ -71,7 +68,7 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- Contact Number -->
+
         <mat-form-field appearance="fill">
           <mat-label>Contact Number</mat-label>
           <input matInput type="tel" formControlName="contact" />
@@ -82,16 +79,25 @@
         </mat-form-field>
       </div>
     </div>
+    <mat-form-field appearance="fill" *ngIf="isEditMode" class="status-field">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="ongoing">Ongoing</mat-option>
+        <mat-option value="completed">completed</mat-option>
+        <mat-option value="suspended">Suspended</mat-option>
+      </mat-select>
+      <mat-error *ngIf="studentForm.controls['status'].invalid && studentForm.controls['status'].touched">
+        Status is required
+      </mat-error>
+    </mat-form-field>
 
-    <!-- Image Upload -->
     <div class="image-upload">
       <label for="imageUpload">Upload Image</label>
       <input type="file" id="imageUpload" (change)="onFileSelected($event)" accept="image/*" />
     </div>
 
-    <!-- Actions -->
     <mat-dialog-actions align="end">
-      <button mat-raised-button style="border-radius: 20px;"  color="warn" (click)="closeDialog()">Cancel</button>
+      <button mat-raised-button style="border-radius: 20px;" color="warn" (click)="closeDialog()">Cancel</button>
       <button mat-raised-button style="border-radius: 20px;" color="primary" (click)="saveStudent()" [disabled]="!studentForm.valid">
         {{ isEditMode ? 'Update' : 'Save' }}
       </button>

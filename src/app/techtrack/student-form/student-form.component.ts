@@ -37,7 +37,9 @@ export class StudentFormComponent implements OnInit {
       gender: [this.data?.gender || '', [Validators.required]],
       email: [this.data?.email || '', [Validators.required, Validators.email]],
       contact: [this.data?.contact || '', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      studentImage: [null]
+      studentImage: [null],
+      status: [this.data?.status || 'ongoing']
+
     });
 
     this.isEditMode = !!this.data?.studentId;

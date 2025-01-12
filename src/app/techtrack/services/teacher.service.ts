@@ -35,6 +35,16 @@ export class TeacherService {
     const teacher = this.getMockTeachers().find(s => s.teacherId == teacherId);
     return of(teacher);
   }
+  addTeacher(teacher: Teacher): Observable<Teacher> {
+    debugger;
+    return this.http.post<Teacher>(`${this.apiUrl}/teacher`, teacher);
+  }
+
+  updateTeacher(teacher: Teacher): Observable<Teacher> {
+    debugger;
+    return this.http.put<Teacher>(`${this.apiUrl}/teacher/${teacher.teacherId}`, teacher);
+  }
+
   deleteTeacher(teacherId: string) {
     debugger;
     return this.http.delete(`/api/subject/${teacherId}`);

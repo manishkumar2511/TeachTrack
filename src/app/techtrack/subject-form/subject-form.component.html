@@ -1,0 +1,55 @@
+<h2>{{ subjectForm.controls['subjectId'].value ? 'Edit Subject' : 'Add New Subject' }}</h2>
+
+<div>
+  <form [formGroup]="subjectForm" class="subject-form">
+    <div class="form-container">
+      <div class="form-left">
+        <mat-form-field appearance="fill" *ngIf="subjectForm.controls['subjectId'].value">
+          <mat-label>Subject ID</mat-label>
+          <input matInput formControlName="subjectId" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Subject Name</mat-label>
+          <input matInput formControlName="name" />
+          <mat-error *ngIf="subjectForm.controls['name'].invalid && subjectForm.controls['name'].touched">
+            <span *ngIf="subjectForm.controls['name'].hasError('required')">Subject name is required</span>
+            <span *ngIf="subjectForm.controls['name'].hasError('minlength')">Minimum 3 characters required</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-right">
+        <mat-form-field appearance="fill">
+          <mat-label>Class Name</mat-label>
+          <input matInput formControlName="className" />
+          <mat-error *ngIf="subjectForm.controls['className'].invalid && subjectForm.controls['className'].touched">
+            Class name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Languages</mat-label>
+          <mat-select formControlName="languages"
+                      multiple
+                      placeholder="Select languages">
+            <mat-option *ngFor="let language of availableLanguages" [value]="language">
+              {{ language }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="subjectForm.get('languages')?.hasError('required')">
+            At least one language is required.
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button style="border-radius: 20px;" color="warn" (click)="closeDialog()">Cancel</button>
+      <button mat-raised-button style="border-radius: 20px;" color="primary" (click)="saveSubject()" [disabled]="!subjectForm.valid">
+        {{ subjectForm.controls['subjectId'].value ? 'Update' : 'Save' }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

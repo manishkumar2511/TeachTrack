@@ -4,8 +4,8 @@ import { SubjectService } from '../../services/subject.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { StudentFormComponent } from '../../student-form/student-form.component';
 import { AlertDialogBoxComponent } from '../../helper/alert-dialog-box/alert-dialog-box.component';
+import { SubjectFormComponent } from '../../subject-form/subject-form.component';
 
 @Component({
   selector: 'app-subjects-list',
@@ -63,17 +63,17 @@ export class SubjectsListComponent implements OnInit {
   }
 
   openSubjectFormDialog(student?: any): void {
-    const dialogRef = this.dialog.open(StudentFormComponent, {
-      width: '600px',
-      height: '500px',
+    const dialogRef = this.dialog.open(SubjectFormComponent, {
+      width: '500px',
+      height: '300px',
     });
   }
 
   editSubjectRecord(studentId: string) {
     this.subjectService.getSubjectById(studentId).subscribe(subject => {
-      const dialogRef = this.dialog.open(StudentFormComponent, {
-        width: '600px',
-        height: '500px',
+      const dialogRef = this.dialog.open(SubjectFormComponent, {
+        width: '500px',
+        height: '300px',
         data: subject
       });
 
@@ -85,10 +85,10 @@ export class SubjectsListComponent implements OnInit {
     });
   }
 
-  deleteSubjetRecord(studentId: string) {
+  deleteSubjetRecord(subjectId: string) {
     const dialogRef = this.dialog.open(AlertDialogBoxComponent, {
       data: {
-        studentId: studentId,
+        subjectId: subjectId,
         message: 'Are you sure you want to delete this subject?',
         actionTitle: 'Delete'
       }

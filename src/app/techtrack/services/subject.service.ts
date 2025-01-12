@@ -32,10 +32,20 @@ export class SubjectService {
   //}
 
   getSubjectById(subjectId: string): Observable<Subject> {
+    debugger;
     const subject = this.getMockSubjects().find(s => s.subjectId == subjectId);
     return of(subject);
   }
 
+  addSubject(subject: Subject): Observable<Subject> {
+    debugger;
+    return this.http.post<Subject>(`${this.apiUrl}/subject`, subject);
+  }
+
+  updateSubject(subject: Subject): Observable<Subject> {
+    debugger;
+    return this.http.put<Subject>(`${this.apiUrl}/subject/${subject.subjectId}`, subject);
+  }
   deleteSubject(subjectId: string) {
     debugger;
     return this.http.delete(`/api/subject/${subjectId}`);
