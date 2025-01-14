@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
 import { TechTrackRoutingModule } from './techtrack-routing.module';
 import { TeachersListComponent } from './list/teachers-list/teachers-list.component';
 import { SubjectsListComponent } from './list/subjects-list/subjects-list.component';
@@ -21,17 +20,19 @@ import { AlertDialogBoxComponent } from './helper/alert-dialog-box/alert-dialog-
 import { SubjectFormComponent } from './subject-form/subject-form.component';
 import { TeacherFormComponent } from './teacher-form/teacher-form.component';
 import { MatSelectModule } from '@angular/material/select';
+import { StudentListComponent } from './list/student-list/student-list.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
     TeachersListComponent,
     SubjectsListComponent,
     StudentFormComponent,
+    StudentListComponent,
     AlertDialogBoxComponent,
     SubjectFormComponent,
-    TeacherFormComponent,
+    TeacherFormComponent
+   
     
   ],
   providers: [StudentService],

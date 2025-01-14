@@ -1,0 +1,15 @@
+.banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.banner-image {
+  width: 100%;
+  max-width: 1200px; /* Adjust width as needed */
+  height: 300px; /* Set desired height */
+  object-fit: cover; /* Ensure it covers without distortion */
+  border-radius: 15px; /* Smooth rounded edges */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Adds a soft shadow */
+}
