@@ -7,6 +7,7 @@ import { TeacherService } from '../../services/teacher.service';
 import { AlertDialogBoxComponent } from '../../helper/alert-dialog-box/alert-dialog-box.component';
 import { AlertMessage } from '../../helper/alertMessage';
 import { TeacherFormComponent } from '../../teacher-form/teacher-form.component';
+import { Subject, debounceTime, filter } from 'rxjs';
 
 @Component({
   selector: 'app-teachers-list',
@@ -18,6 +19,8 @@ import { TeacherFormComponent } from '../../teacher-form/teacher-form.component'
 export class TeachersListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  private searchSubject = new Subject<string>();
+  private readonly debounceTimeMs = 1000;
   searchTerm = '';
   text = '';
   timeout: any;
@@ -32,13 +35,21 @@ export class TeachersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeachers();
+    this.searchSubject.pipe(
+      debounceTime(this.debounceTimeMs),
+      filter(searchValue => searchValue.trim().length > 0)
+    ).subscribe(searchValue => {
+      this.getTeacherByName(searchValue);
+    });
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
+  ngOnDestroy() {
+    this.searchSubject.complete();
+  }
   getTeachers(): void {
     this.teacherService.getTeachers().subscribe(teachers => {
       this.dataSource = new MatTableDataSource(teachers);
@@ -48,17 +59,8 @@ export class TeachersListComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
-
-  onKeyUp(): void {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-
-    this.timeout = setTimeout(() => {
-      this.getTeacherByName(this.searchTerm);
-    }, 500);
-
-    this.text = this.searchTerm;
+  onSearch() {
+    this.searchSubject.next(this.searchTerm);
   }
 
   getTeacherByName(searchTeacherName: string): void {

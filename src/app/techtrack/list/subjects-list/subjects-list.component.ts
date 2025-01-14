@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AlertDialogBoxComponent } from '../../helper/alert-dialog-box/alert-dialog-box.component';
 import { SubjectFormComponent } from '../../subject-form/subject-form.component';
+import { Subject, debounceTime, filter } from 'rxjs';
 
 @Component({
   selector: 'app-subjects-list',
@@ -18,6 +19,8 @@ export class SubjectsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!: MatTableDataSource<any>;
+  private searchSubject = new Subject<string>();
+  private readonly debounceTimeMs = 1000;
   searchTerm = '';
   timeout: any;
 
@@ -29,6 +32,12 @@ export class SubjectsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSubjects();
+    this.searchSubject.pipe(
+      debounceTime(this.debounceTimeMs),
+      filter(searchValue => searchValue.trim().length > 0)
+    ).subscribe(searchValue => {
+      this.getSubjectsByName(searchValue);
+    });
   }
 
   ngAfterViewInit() {
@@ -45,15 +54,12 @@ export class SubjectsListComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
+  ngOnDestroy() {
+    this.searchSubject.complete();
+  }
 
-  onKeyUp(): void {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-
-    this.timeout = setTimeout(() => {
-      this.getSubjectsByName(this.searchTerm);
-    }, 500);
+  onSearch() {
+    this.searchSubject.next(this.searchTerm);
   }
 
   getSubjectsByName(searchSubjectName: string): void {

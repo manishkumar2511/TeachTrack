@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentFormComponent } from '../student-form/student-form.component';
 import { StudentService } from '../services/student.service';
-import { Subject} from 'rxjs';
+import { Subject, debounceTime, filter} from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,6 +20,8 @@ import { AlertMessage } from '../helper/alertMessage';
 export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  private searchSubject = new Subject<string>();
+  private readonly debounceTimeMs = 1000;
   searchTerm = '';
   text = '';
   timeout: any;
@@ -36,6 +38,19 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getStudents();
+    this.searchSubject.pipe(
+      debounceTime(this.debounceTimeMs),
+      filter(searchValue => searchValue.trim().length > 0)
+    ).subscribe(searchValue => {
+      this.getStudentsByName(searchValue);
+    });
+  }
+  ngOnDestroy() {
+    this.searchSubject.complete();
+  }
+
+  onSearch() {
+    this.searchSubject.next(this.searchTerm);
   }
 
   ngAfterViewInit() {
@@ -51,18 +66,6 @@ export class HomeComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-  }
-
-  onKeyUp(): void {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-
-    this.timeout = setTimeout(() => {
-      this.getStudentsByName(this.searchTerm);
-    }, 500);
-
-    this.text = this.searchTerm;
   }
 
   getStudentsByName(searchStudentName: string): void {

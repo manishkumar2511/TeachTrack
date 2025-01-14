@@ -34,7 +34,7 @@
       <div class="mr-3">
         <mat-form-field style="border-radius:20px;">
           <mat-label>Search by Subject Name</mat-label>
-          <input matInput type="search" [(ngModel)]="searchTerm" (keyup)="onKeyUp()">
+          <input matInput type="search" [(ngModel)]="searchTerm" (input)="onSearch()">
         </mat-form-field>
       </div>
 
