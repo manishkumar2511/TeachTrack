@@ -1,16 +1,15 @@
 .nav-link {
-  margin-right: 20px; 
+  margin-right: 20px;
   text-decoration: none;
   color: white;
 }
 
-.nav-link:last-child {
-  margin-right: 0;
-}
+  .nav-link:last-child {
+    margin-right: 0;
+  }
 
 nav {
   display: flex;
-  gap: 20px; 
 }
 
 .active {
@@ -18,4 +17,19 @@ nav {
   transform: scale(1.1);
   transition: border-bottom 0.3s ease, transform 0.3s ease;
   display: inline-block;
+}
+
+/* Make the nav bar fixed */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+/* Add padding to the content to prevent it from hiding under the fixed navbar */
+.content-wrapper {
+  padding-top: 80px; /* Adjust this value based on the height of your navbar */
+  overflow-y: auto;
 }
