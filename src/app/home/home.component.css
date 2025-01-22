@@ -1,13 +1,15 @@
 .home-container {
   display: flex;
+
   justify-content: center;
   align-items: center;
   gap: 4px;
   flex-wrap: wrap;
-  margin-top:68px;
+  margin-top:100px;
 }
 
 .banner-container {
+  margin-top: 20px;
   flex: 1;
   display: flex;
   justify-content: center;
